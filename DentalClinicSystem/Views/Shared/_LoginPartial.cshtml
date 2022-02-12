@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+<div>
+
+    <a class="navbar-brand" href="/DentalClinicSystem/ControlPanel" style="font-size:unset">
+        <span class="glyphicon glyphicon-wrench">Settings</span>
+    </a>
+
+    <a class="navbar-brand" href="javascript:document.getElementById('logoutForm').submit()" style="padding-right: 100px;">
+        <span class="glyphicon glyphicon-log-out" >Logout</span>
+    </a>
+</div>
+
+    }
+}

@@ -1,0 +1,117 @@
+﻿<h1 style="text-align:center">{{Title}}</h1>
+<hr />
+
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Full name -->
+        <div class="form-group col-md-6">
+            <label>Full Name</label>
+            <input type="text"
+                   maxlength="250"
+                   formControlName="fullname"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.fullname.errors }" />
+
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group col-md-6">
+            <label>Phone Number</label>
+            <input type="text"
+                   pattern="[0-9]+"
+                   maxlength="10"
+                   formControlName="phoneNumber"
+                   class="form-control"
+                   [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+
+        </div>
+
+        <!-- Birth Date -->
+        <div class="form-group col-md-6">
+            <label>Birthdate</label>
+            <div class="input-group">
+                <input class="form-control"
+                       type="date"
+                       formControlName="birthdate"
+                       [ngClass]="{ 'is-invalid': submitted && f.birthdate.errors }"
+                       [(ngModel)]="model">
+            </div>
+        </div>
+
+        <!-- Job -->
+        <div class="form-group col-md-6">
+            <label>Job</label>
+            <input class="form-control"
+                   formControlName="job"
+                   type="text" />
+        </div>
+
+        <!-- Address -->
+        <div class="form-group col-md-6">
+            <label>Address</label>
+            <input class="form-control"
+                   formControlName="address"
+                   type="text" />
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group col-md-6">
+            <label>Gender</label>
+            <br />
+            <label>
+                <input type="radio" formControlName="gender" value="1"> Male
+            </label>
+            &#160;
+            <label>
+                <input type="radio" formControlName="gender" value="2"> Female
+            </label>
+        </div>
+
+        <!-- Surgeries -->
+        <div class="col-md-12">
+            <div class="form-group col-md-6" style="padding:0px;">
+                <label>Surgeries</label>
+                <textarea formControlName="surgeries"
+                          class="form-control" placeholder="Enter text here..." rows="4" cols="50" name="comment" form="usrform"></textarea>
+            </div>
+
+            <!-- Medicines -->
+            <div class="form-group col-md-6">
+                <label>Medicines</label>
+                <textarea formControlName="medicines"
+                          class="form-control" placeholder="Add text here..." rows="4" cols="50" name="comment" form="usrform"></textarea>
+            </div>
+        </div>
+        <!-- Insurance Type -->
+        <div class="form-group col-md-6">
+            <label>Insurance Type</label>
+            <select class="form-control" formControlName="insurancetypeId">
+                <option *ngFor="let item of insuranceTypes" value="{{item.Id}}">{{item.InsuranceCompanyName}}</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <!-- Validations -->
+            <ul [ngStyle]="{'color':true ? 'red' : 'green' }">
+                <li *ngIf="submitted && f.fullname.errors ">Fullname is required.</li>
+                <li *ngIf="submitted && f.phoneNumber.errors">Phone number is required.</li>
+                <li *ngIf="submitted && f.birthdate.errors">Birthdate is required.</li>
+            </ul>
+        </div>
+        <!-- Save -->
+        <div class="col-md-offset-9">
+            <button *ngIf="!isEditMode" style="margin:5px" type="submit" class="btn btn-primary btn-lg">Save</button>
+            <button *ngIf="isEditMode" style="margin:5px" type="submit" class="btn btn-success btn-lg">Update</button>
+            <button [ngClass]="{ 'disabled ': isEditMode  }" [ngStyle]="isEditMode && {'cursor': 'no-drop'}" type="button"
+                    (click)="onReset()"
+                    class="btn btn-warning">
+                Reset
+            </button>
+        </div>
+    </form>
+
+
+</div>
+<div style="text-align: end;">
+    <a routerLink="PatientList" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/SeeAllPatients.png" title="See all patients" height="50" width="50"> </a>
+</div>

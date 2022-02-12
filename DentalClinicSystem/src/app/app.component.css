@@ -1,0 +1,53 @@
+table {
+    width: 100%;
+}
+
+td {
+    padding: 16px;
+}
+
+/*.mainPage {
+    text-align: inherit;
+    background-image: url("http://localhost/DentalClinicSystem/Images/background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}*/
+h4 {
+    text-align: center;
+}
+
+img {
+    width: 100px;
+}
+
+.mainIcon {
+    width: 10%;
+}
+
+a {
+    background: rgba(236, 240, 241,0);
+    border-radius: 70px;
+    color: whitesmoke;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    font-family: 'Roboto';
+    box-shadow: 0px 0px 30px rgba(44, 62, 80,0.0);
+    transition: .25s;
+}
+
+    a:hover {
+        background: #FFF;
+        color: #111;
+        font-size: 20px;
+        letter-spacing: 5px;
+        border: 5px solid whitesmoke;
+        box-shadow: 0px 0px 30px rgba(44, 62, 80,1.0);
+    }
+
+    a:active {
+        letter-spacing: 2px;
+        font-size: 15px;
+        border: 3px solid whitesmoke;
+    }

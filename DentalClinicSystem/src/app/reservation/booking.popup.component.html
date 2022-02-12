@@ -1,0 +1,47 @@
+﻿<h2 style="text-align:center" mat-dialog-title>Booking New Appointment</h2>
+<mat-dialog-content class="mat-typography">
+    <hr />
+    <div style="align-content:center">
+        <label>Choose Date</label> &nbsp;
+        <input (change)="getAvailableHours()" [(ngModel)]="bookDate" type="date">
+    </div>
+    <br />
+    <div (click)="showWarningMessage()" [ngClass]="{ 'disabledDiv ': !isDateSelected  }">
+        <h3>Morning: </h3>
+        <input type="radio" value="10:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('10:00') ? 'green' : 'red' }">&nbsp; 10:00 AM</label>  &nbsp;
+
+        <input type="radio" value="11:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('11:00') ? 'green' : 'red' }">&nbsp; 11:00 AM</label> &nbsp;
+
+        <input type="radio" value="12:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('12:00') ? 'green' : 'red' }">&nbsp; 12:00 AM</label> &nbsp;
+        <br />
+
+        <h3>Evening: </h3>
+        <input type="radio" value="13:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('13:00') ? 'green' : 'red' }">&nbsp; 01:00 PM</label> &nbsp;
+
+        <input type="radio" value="14:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('14:00') ? 'green' : 'red' }">&nbsp; 02:00 PM</label> &nbsp;
+
+        <input type="radio" value="15:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('15:00') ? 'green' : 'red' }">&nbsp; 03:00 PM</label> &nbsp;
+
+        <input type="radio" value="16:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('16:00') ? 'green' : 'red' }">&nbsp; 04:00 PM</label> &nbsp;
+
+        <input type="radio" value="17:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('17:00') ? 'green' : 'red' }">&nbsp; 05:00 PM</label> &nbsp;
+    </div>
+
+    <br />
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <input type="button" class="btn btn-success" (click)="addAppointment()" value="Save" />
+    &nbsp;
+    <button class="btn btn-warning" mat-dialog-close>Cancal</button>
+
+
+</mat-dialog-actions>

@@ -1,0 +1,61 @@
+﻿<div class="text-center">
+    <h1>Reservations</h1>
+    <div class="input-group">
+        <input type="text" (keypress)="search($event)" [(ngModel)]="param" class="form-control" placeholder="Search by name or phone number.." name="search">
+        <div class="input-group-btn">
+            <button style="cursor:pointer" class="btn btn-default" (click)="search('Enter')" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            <button style="cursor:pointer" class="btn btn-default" (click)="search('Refresh')" type="submit"><i class="glyphicon glyphicon-refresh"></i></button>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="list">
+    <table class="table table-striped ">
+        <tr>
+            <th style="text-align:center">Full Name</th>
+            <th style="text-align:center">Age</th>
+            <th style="text-align:center">Last Visit</th>
+            <th style="text-align:center">Next Visit</th>
+            <th style="text-align:center">Full Price</th>
+            <th style="text-align:center">Remaining </th>
+            <th style="text-align:center">Paid</th>
+            <th style="text-align:center">Financial Record</th>
+            <th style="text-align:center">Patient File</th>
+            <th style="text-align:center">Booking</th>
+
+
+        </tr>
+        <tr *ngFor="let item of patientReservation | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td style="text-align:center">{{item.FullName}}</td>
+            <td style="text-align:center">{{item.Age}}</td>
+            <td style="text-align:center"> {{(item.LastVisit !== null) ? (item.LastVisit| date: 'dd/MM/yyyy hh:mm a')  : "غير محدد"}}</td>
+            <td style="text-align:center">{{(item.NextVisit !== null ) ? (item.NextVisit | date: 'dd/MM/yyyy hh:mm a') : "غير محدد" }}</td>
+            <td style="text-align:center">{{item.FullPrice}}  </td>
+            <td style="text-align:center">{{item.Remaining}}</td>
+            <td style="text-align:center">{{item.Paid}}</td>
+
+            <td style="text-align:center">
+                <a style="color: green; cursor: pointer; ">
+                    <span (click)="openFinancialRecordPopup(item)" class="glyphicon glyphicon-usd"></span>
+                </a>
+            </td>
+
+            <td style="text-align:center">
+                <a style="color: orange; cursor: pointer; ">
+                    <span (click)="openPatientFile(item)" class="glyphicon glyphicon-folder-open"></span>
+                </a>
+            </td>
+            <td style="text-align:center" align="center">
+                <a style="color: black; cursor: pointer;">
+                    <span (click)="openBookingPopup(item)" class="glyphicon glyphicon-calendar"></span>
+                </a>
+            </td>
+
+        </tr>
+    </table>
+    <pagination-controls style="text-align: center;" [hidden]="patientReservation == 0" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+

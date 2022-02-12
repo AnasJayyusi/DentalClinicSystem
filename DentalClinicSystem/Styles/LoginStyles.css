@@ -1,0 +1,40 @@
+﻿body {
+    height: 100vh;
+    font-family: "Open Sans", sans-serif;
+    background-size: cover;
+}
+
+
+
+.mainBox {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 10%;
+    background-image: url("http://localhost/DentalClinicSystem/Images/background.png");
+    text-align: inherit;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.LoginBox {
+    border-radius: 20px;
+    padding: 10px 20px 20px 20px;
+    width: 90%;
+    max-width: 380px;
+    position: relative;
+    padding: 40px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.3);
+    margin:auto;
+}
+
+.Title {
+    color: #444;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 10px 0 30px 0;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}

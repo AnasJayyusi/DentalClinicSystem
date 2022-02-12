@@ -1,0 +1,43 @@
+﻿<div class="text-center">
+    <h1>Patients</h1>
+    <div class="input-group">
+        <input type="text" (keypress)="search($event)" [(ngModel)]="param" class="form-control" placeholder="Search by name or phone number.." name="search">
+        <div class="input-group-btn">
+            <button class="btn btn-default" (click)="search('Enter')" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            <button class="btn btn-default" (click)="search('Refresh')" type="submit"><i class="glyphicon glyphicon-refresh"></i></button>
+        </div>
+    </div>
+</div>
+<br />
+<div class="list">
+    <table class="table table-striped">
+        <tr>
+            <th style="text-align:center">Full Name</th>
+            <th style="text-align:center">Phone number</th>
+            <th style="text-align:center">Gender</th>
+            <th style="text-align:center">Edit</th>
+            <th style="text-align:center">Delete</th>
+        </tr>
+        <tr *ngFor="let item of patients | paginate: { itemsPerPage: 10, currentPage: p }">
+            <td style="text-align:center">{{item.FullName}}</td>
+            <td style="text-align:center">{{item.PhoneNumber}}</td>
+            <td *ngIf="item.Gender == 1" style="text-align:center">Male</td>
+            <td *ngIf="item.Gender == 2" style="text-align:center">Female</td>
+            <td *ngIf="item.Gender == 0" style="text-align:center">Not Set</td>
+            <td style="text-align:center">
+                <a style="color: orange; cursor: pointer; ">
+                    <span (click)="edit(item.Id)" class="glyphicon glyphicon-edit"></span>
+                </a>
+            </td>
+            <td style="text-align:center" align="center">
+                <a style="color: red; cursor: pointer;">
+                    <span (click)="delete(item.Id,item.FullName)" class="glyphicon glyphicon-remove"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+    <pagination-controls style="text-align: center;" [hidden]="patients==0" (pageChange)="p = $event"></pagination-controls>
+</div>
+
+
+

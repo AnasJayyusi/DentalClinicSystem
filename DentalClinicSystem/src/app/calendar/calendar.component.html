@@ -1,0 +1,75 @@
+
+<div class="row">
+    <div class="column">
+        <table class="table table-striped">
+            <tr>
+                <th colspan="3" class="tableTitle">Today's Patients</th>
+            </tr>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Time</th>
+                    <th>Remove</th>
+                </tr>
+                <tr *ngFor="let item of todayPatients">
+                    <td>{{item.PatientName}}</td>
+                    <td>{{item.VisitTime | date:'shortTime'}}</td>
+                    <td>{{item.PhoneNumber}}</td>
+                    <td style="text-align:center">
+                        <a style="color: red; cursor: pointer; text-align:center">
+                            <span (click)="deleteAppointment(item.VisitId)" class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot style="color:green">Total:{{todayPatients.length}}</tfoot>
+        </table>
+    </div>
+
+
+    <div  class="column">
+        <table class="table table-striped">
+            <tr>
+                <th colspan="3" class="tableTitle">Tomorrow's Patients</th>
+            </tr>
+            <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                    <th>Time</th>
+                    <th>Remove</th>
+                </tr>
+                <tr *ngFor="let item of tommorowPatients">
+                    <td>{{item.PatientName}}</td>
+                    <td>{{item.VisitTime | date:'shortTime'}}</td>
+                    <td>{{item.PhoneNumber}}</td>
+                    <td style="text-align:center">
+                        <a style="color: red; cursor: pointer; text-align:center">
+                            <span (click)="deleteAppointment(item.VisitId)" class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot style="color:green">Total:{{tommorowPatients.length}}</tfoot>
+        </table>
+    </div>
+
+
+</div>
+
+
+<div style="text-align:center" class="row">
+    <p>The Current Patient Now is : <strong>{{fullVisitInfo.Name}}&nbsp;</strong></p>
+    <p style="color: rgb(19, 216, 52);">Phone Number is : <strong>{{fullVisitInfo.PhoneNumber}}&nbsp;</strong></p>
+    <p style="color: rgb(19, 25, 216); ">at : {{fullVisitInfo.Time | date:'shortTime'}}&nbsp;</p>
+    <p style="color: rgb(216, 19, 19);">Remaining Cost: {{fullVisitInfo.RemainingCost}} JD</p>
+    <p style="color: rgb(193, 216, 19);">Last Visit Was :  {{fullVisitInfo.LastVisit | date:'fullDate'}} </p>
+    <p>
+        <a (click)="getCurrentPatientDetails()" class="btn btn-info btn-md">
+            <span class="glyphicon glyphicon-refresh"></span> Refresh
+        </a>
+    </p>
+</div>
+
+

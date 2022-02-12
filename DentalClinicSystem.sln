@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic", "DentalClinicSystem\DentalClinic.csproj", "{709C868D-C5BE-4264-9579-30EE94C5C1D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinicSystem.Tests", "DentalClinicSystem.Tests\DentalClinicSystem.Tests.csproj", "{6BEB0212-B27D-422E-A789-C8E7DC103DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic.DAL", "DentalClinic.DAL\DentalClinic.DAL.csproj", "{6411C9C6-C5DC-4B68-B0C5-D55B539BA5CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic.Model", "DentalClinic.Model\DentalClinic.Model.csproj", "{D83B72DE-9BE9-4EF9-8C34-F2B2EB287D34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic.Repository", "DentalClinic.Repository\DentalClinic.Repository.csproj", "{47670144-E9FA-4E7E-9525-D5391D2BB54C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalClinic.API", "DentalClinic.API\DentalClinic.API.csproj", "{28B0DF0F-EB1A-4792-B391-FCE67F8AC6ED}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{709C868D-C5BE-4264-9579-30EE94C5C1D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{709C868D-C5BE-4264-9579-30EE94C5C1D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{709C868D-C5BE-4264-9579-30EE94C5C1D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{709C868D-C5BE-4264-9579-30EE94C5C1D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BEB0212-B27D-422E-A789-C8E7DC103DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BEB0212-B27D-422E-A789-C8E7DC103DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BEB0212-B27D-422E-A789-C8E7DC103DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BEB0212-B27D-422E-A789-C8E7DC103DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6411C9C6-C5DC-4B68-B0C5-D55B539BA5CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6411C9C6-C5DC-4B68-B0C5-D55B539BA5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6411C9C6-C5DC-4B68-B0C5-D55B539BA5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6411C9C6-C5DC-4B68-B0C5-D55B539BA5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D83B72DE-9BE9-4EF9-8C34-F2B2EB287D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D83B72DE-9BE9-4EF9-8C34-F2B2EB287D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D83B72DE-9BE9-4EF9-8C34-F2B2EB287D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D83B72DE-9BE9-4EF9-8C34-F2B2EB287D34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47670144-E9FA-4E7E-9525-D5391D2BB54C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47670144-E9FA-4E7E-9525-D5391D2BB54C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47670144-E9FA-4E7E-9525-D5391D2BB54C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47670144-E9FA-4E7E-9525-D5391D2BB54C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28B0DF0F-EB1A-4792-B391-FCE67F8AC6ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28B0DF0F-EB1A-4792-B391-FCE67F8AC6ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28B0DF0F-EB1A-4792-B391-FCE67F8AC6ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28B0DF0F-EB1A-4792-B391-FCE67F8AC6ED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5C1A2B2-0289-40E1-ABFA-C410312D0EA3}
+	EndGlobalSection
+EndGlobal

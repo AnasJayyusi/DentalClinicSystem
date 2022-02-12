@@ -1,0 +1,44 @@
+<table>
+    <!-- Calander Add New Patient -->
+    <tr>
+          
+        <td colspan="3" style="text-align: center;">
+            <p style="text-align:initial">Today is {{today | date:'fullDate'}}</p>
+            <p style="text-align:initial">The time is {{today | date:'h:mm a z'}}</p>
+            <a routerLink="Calendar" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/Calendar.png"> </a>
+        </td>
+        <td class="mainIcon">
+            <a routerLink="Patient" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/NewPatient.png"> </a>
+            <h4>Add New Patient</h4>
+        </td>
+    </tr>
+
+    <!-- Routing + Reservation -->
+    <tr>
+        <td colspan="3" rowspan="3" class="mainPage">
+            <router-outlet></router-outlet>
+        </td>
+        <td class="mainIcon">
+            <a routerLink="Reservation" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/OBD.png" alt="Outpatient department treatment"> </a>
+            <h4>Reservations & Invoices</h4>
+        </td>
+    </tr>
+
+    <!-- Reports -->
+    <tr>
+        <td class="mainIcon">
+            <a routerLink="Report" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/Reports.png"> </a>
+            <h4>Reports</h4>
+        </td>
+    </tr>
+
+    <!-- Billing And Accounting -->
+    <tr>
+        <td colspan="3">
+            <a routerLink="Report" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/BillingAndAccounting.png"> </a>
+            <h4>Billing And Accounting</h4>
+        </td>
+
+    </tr>
+
+</table>

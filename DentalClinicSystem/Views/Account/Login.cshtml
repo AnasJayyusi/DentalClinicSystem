@@ -1,0 +1,100 @@
+﻿@using DentalClinic.Model
+@model LoginViewModel
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="~/Styles/LoginStyles.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+    <title>
+        Dental Clinic System
+    </title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .btn {
+            background-color: DodgerBlue;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        a {
+            color: black
+        }
+
+        /* Darker background on mouse-over */
+        .btn:hover {
+            background-color: RoyalBlue;
+        }
+    </style>
+</head>
+
+
+    <h2>@ViewBag.Title</h2>
+    <div class="mainBox">
+        <div class="LoginBox">
+            <div style="text-align:center" class="Title">
+                <img src="http://localhost/DentalClinicSystem/Images/LoginLogo.png" alt="Avatar" style="width: 200px; border-radius: 50%; text-align: center ">
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <section id="loginForm">
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @*@Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })*@
+                                    <div class="col-md-12">
+                                        @*  *@
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username" })
+                                        @Html.ValidationMessageFor(m=>m.UserName,"", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
+                                    <div class="col-md-12">
+                                        @*  *@
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class=" col-md-10">
+                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                        @Html.LabelFor(m => m.RememberMe)
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <input type="submit" value="Sign In" class="btn btn-primary btn-lg btn-block" />
+                                    </div>
+                                </div>
+                                @*<p>
+                                        @Html.ActionLink("Register as a new user", "Register")
+                                    </p>*@
+                                @* Enable this once you have account confirmation enabled for password reset functionality
+                                    <p>
+                                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
+                                    </p>*@
+                            }
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+
