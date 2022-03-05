@@ -22,6 +22,26 @@ export class FullVisitInfo {
 }
 export class LiteVisitInfo {
 }
+export class Bill {
+}
+export class BillsAmount {
+    constructor() {
+        this.SalariesAmount = 0;
+        this.MeterialAmount = 0;
+        this.RentAmount = 0;
+        this.ElectricityBillsAmount = 0;
+        this.WaterBillsAmount = 0;
+        this.TaxAmount = 0;
+        this.AmmanMunicipalityAmount = 0;
+        this.ClinicConsumablesAmount = 0;
+        this.OtherAmount = 0;
+        this.TotalAmount = 0;
+    }
+}
+export class PatientFile {
+}
+export class ProceduresName {
+}
 // Enums
 export var Gender;
 (function (Gender) {

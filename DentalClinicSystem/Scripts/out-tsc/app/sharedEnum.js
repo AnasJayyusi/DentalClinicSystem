@@ -15,6 +15,8 @@ export var ValidationMessages;
     ValidationMessages[ValidationMessages["ChooseDate"] = 12] = "ChooseDate";
     ValidationMessages[ValidationMessages["AlreadyBooking"] = 13] = "AlreadyBooking";
     ValidationMessages[ValidationMessages["NoPatientNow"] = 14] = "NoPatientNow";
+    ValidationMessages[ValidationMessages["NoBillForToday"] = 15] = "NoBillForToday";
+    ValidationMessages[ValidationMessages["RequiredFieldsMissingPatientFile"] = 16] = "RequiredFieldsMissingPatientFile";
 })(ValidationMessages || (ValidationMessages = {}));
 var InvoiceType;
 (function (InvoiceType) {

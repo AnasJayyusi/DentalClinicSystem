@@ -1,6 +1,6 @@
 import { __decorate, __metadata } from "tslib";
 import { DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { toaster } from '../toaster';
@@ -23,18 +23,18 @@ let PatientComponent = class PatientComponent {
     ngOnInit() {
         this.getInsuranceType();
         this.checkForm();
-        this.Title = "Add new patient info";
+        this.title = "Add new patient info";
         // For Edit Mode
-        if (this.svc._patientId != -1) {
+        if (this.svc._patientId != -1 || Number(this.mode) == 3) {
             this.getPatientById();
-            this.Title = "Edit patient nfo";
+            this.title = "Edit patient nfo";
             this.isEditMode = true;
         }
     }
     ngOnDestroy() {
         this.patient = new Patient();
         this.svc._patientId = -1;
-        this.Title = "Add New Patient";
+        this.title = "Add New Patient";
         this.isEditMode = false;
     }
     // Gets / Sets
@@ -98,7 +98,8 @@ let PatientComponent = class PatientComponent {
         }, error => {
             this.toaster.render(ValidationMessages.Error);
         }, () => {
-            this.router.navigate(['Patient/PatientList'], { skipLocationChange: true });
+            if (this.mode != 3)
+                this.router.navigate(['Patient/PatientList'], { skipLocationChange: true });
         });
     }
     getInsuranceType() {
@@ -113,6 +114,8 @@ let PatientComponent = class PatientComponent {
         });
     }
     getPatientById() {
+        if (this.mode == 3)
+            this.svc._patientId = Number(this.patientId);
         this.svc.getPatientById(this.svc._patientId)
             .subscribe(result => {
             this.patient = result;
@@ -124,7 +127,7 @@ let PatientComponent = class PatientComponent {
             // No errors, route to new page here
         });
     }
-    // Helper
+    // Mapping
     mappingObjToEntity(obj) {
         this.patient.FullName = obj.fullname;
         this.patient.Birthdate = new Date(obj.birthdate);
@@ -148,9 +151,17 @@ let PatientComponent = class PatientComponent {
         this.form.controls.insurancetypeId.setValue(patient.InsuranceTypeId.toString());
     }
 };
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], PatientComponent.prototype, "mode", void 0);
+__decorate([
+    Input(),
+    __metadata("design:type", Number)
+], PatientComponent.prototype, "patientId", void 0);
 PatientComponent = __decorate([
     Component({
-        selector: 'patient-add',
+        selector: 'patient-addEditRead',
         templateUrl: './patient.component.html',
         styleUrls: ['../sharedStyle.css']
     }),

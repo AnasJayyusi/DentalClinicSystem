@@ -46,6 +46,12 @@ export class toaster {
                 this.toastr.info("There is no patient at the moment", "Not Found", { positionClass: position, "closeButton": true, "progressBar": true });
                 break
 
+            case ValidationMessages.NoBillForToday:
+                this.toastr.info("There is no bill registered today", "Not Found", { positionClass: position, "closeButton": true, "progressBar": true });
+                break
+
+                
+
             // Warning
             case ValidationMessages.TimeIsMissing:
                 this.toastr.warning("", "Select Time Please", { positionClass: position, "closeButton": true, "progressBar": true });
@@ -56,12 +62,17 @@ export class toaster {
                 break;
 
             case ValidationMessages.RequiredFieldsMissing:
-                this.toastr.warning("Required", "Fullname , Phonenumber , birthdate", { positionClass: position, "closeButton": true, "progressBar": true });
+                this.toastr.warning("Fullname , Phonenumber , birthdate", "Required",  { positionClass: position, "closeButton": true, "progressBar": true });
                 break;
 
             case ValidationMessages.AlreadyRegistered:
                 this.toastr.warning("", "This patient already registered!", { positionClass: position, "closeButton": true, "progressBar": true });
                 break;
+
+            case ValidationMessages.RequiredFieldsMissingPatientFile:
+                this.toastr.warning("Quantity  , Price  , Tooth , Office Procedure","Required", { positionClass: position, "closeButton": true, "progressBar": true });
+                break;
+                
 
 
             case ValidationMessages.AlreadyBooking:

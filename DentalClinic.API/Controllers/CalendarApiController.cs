@@ -13,10 +13,12 @@ namespace ClinicSystem.API.Controllers
     public class CalendarApiController : ApiController
     {
         CalendarService _calendarService;
+        ReservationService _reservationService;
 
         public CalendarApiController()
         {
             _calendarService = new CalendarService();
+            _reservationService = new ReservationService();
         }
 
         [Route("GetTodayPatients")]
@@ -64,8 +66,6 @@ namespace ClinicSystem.API.Controllers
             }
         }
 
-
-
         [Route("DeleteAppointment/{visitId}")]
         [HttpGet]
         public IHttpActionResult DeleteAppointment(int visitId)
@@ -73,6 +73,53 @@ namespace ClinicSystem.API.Controllers
             try
             {
                 _calendarService.DeleteAppointment(visitId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetPatientFileById/{patientId}")]
+        [HttpGet]
+        public IHttpActionResult GetPatientFileById(int patientId)
+        {
+            try
+            {
+                List<PatientFile> patientFilerRecords= _calendarService.GetPatientFileById(patientId);
+                return Ok(patientFilerRecords);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("DeletePatientRecord/{recordId}")]
+        [HttpGet]
+        public IHttpActionResult DeletePatientRecord(int recordId)
+        {
+            try
+            {
+             
+                _calendarService.DeletePatientRecord(recordId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("SavePatientRecord")]
+        [HttpPost]
+        public IHttpActionResult SavePatientRecord(PatientFile patientFile)
+        {
+            try
+            {
+                _reservationService.SaveInvoiceViaPatientFile(patientFile);
+                _calendarService.SavePatientRecord(patientFile);
                 return Ok();
             }
             catch (Exception ex)

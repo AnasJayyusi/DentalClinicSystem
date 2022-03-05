@@ -1,0 +1,123 @@
+﻿<h1 class="titleStyle">{{title}}</h1>
+<hr />
+
+<div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <input type="hidden"
+               formControlName="id">
+
+        <!-- Date -->
+        <div class="form-group col-md-8 offset-4">
+            <label>Date <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> تاريخ الفاتورة </b> </label>
+            <div class="input-group">
+                <input class="form-control"
+                       type="date"
+                       (change)="getBillData()"
+                       formControlName="billDate">
+            </div>
+        </div>
+
+        <!-- Salary -->
+        <div class="form-group col-md-4">
+            <label>Salary <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle">  رواتب </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="salary" />
+        </div>
+
+        <!-- Meterial -->
+        <div class="form-group col-md-4">
+            <label>Meterial <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> مواد </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="meterial" />
+        </div>
+
+        <!-- Rent -->
+        <div class="form-group col-md-4">
+            <label>Rent <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> إيجار </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="rent" />
+        </div>
+
+        <!-- Electricity -->
+        <div class="form-group col-md-4">
+            <label>Electricity <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle">  فاتورة الكهرباء </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="electricity" />
+        </div>
+
+        <!-- Water -->
+        <div class="form-group col-md-4">
+            <label>Water <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> فاتورة المياه </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="water" />
+        </div>
+
+        <!-- Tax -->
+        <div class="form-group col-md-4">
+            <label>Tax <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> ضريبة </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="tax" />
+        </div>
+
+        <!-- Amman Municipality -->
+        <div class="form-group col-md-4">
+            <label>Amman Municipality <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> امانة عمان </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="ammanMunicipality" />
+        </div>
+
+        <!-- Other -->
+        <div class="form-group col-md-4">
+            <label>Clinic Consumables <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> مستهلكات العيادة </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="clinicConsumables" />
+        </div>
+
+        <!-- Other -->
+        <div class="form-group col-md-4">
+            <label>Other <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> مصاريف اخرى </b> </label>
+            <input type="number"
+                   class="form-control"
+                   formControlName="other" />
+        </div>
+
+        <div class="form-group col-md-8">
+            <label>Notes <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> ملاحظات  </b> </label>
+            <textarea id ="note" class="form-control"
+                      formControlName="note"
+                      rows="3" cols="3"> </textarea>
+
+        </div>
+
+        <!-- Save -->
+        <div class="form-group col-md-4">
+            <button *ngIf="!isEditMode" style="margin:5px ; font-size:larger" type="submit" class="btn btn-primary btn-lg">Save</button>
+            <button *ngIf="isEditMode" style="margin: 5px; font-size: larger" type="submit" class="btn btn-success btn-lg">Update</button>
+            <button [ngClass]="{ 'disabled ': isEditMode  }" [ngStyle]="isEditMode && {'cursor': 'no-drop'}" type="button"
+                    (click)="onReset()"
+                    class="btn btn-warning  btn-lg">
+                Reset
+            </button>
+        </div>
+    </form>
+
+    <!-- Navigate To Bills List -->
+    <div style="text-align: end; font-size:xx-large">
+        <a routerLink="BillingList" routerLinkActive="active" skipLocationChange="true">
+            <span style="color:black" class="glyphicon glyphicon-th-list"></span>
+        </a>
+    </div>
+
+
+
+</div>
+
+

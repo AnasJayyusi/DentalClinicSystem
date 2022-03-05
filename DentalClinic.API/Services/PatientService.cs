@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ClinicSystem.API.Services
 {
-    public class PatientService
+    internal class PatientService
     {
         PatientRepository _patientRepository;
         public PatientService()

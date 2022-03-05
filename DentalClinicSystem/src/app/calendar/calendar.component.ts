@@ -1,6 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { PatientFilePopup } from '../reservation/patient.file.popup.component';
+import { PatientProfilePopup } from '../reservation/patient.profile.popup.component';
 import { Patient, LiteVisitInfo, Visit, FullVisitInfo } from '../sharedDtos';
 import { ValidationMessages } from '../sharedEnum';
 import { toaster } from '../toaster';
@@ -20,6 +23,7 @@ export class CalendarComponent implements OnInit {
 
     // Ctor  + ngOnInIt
     constructor(
+        public dialog: MatDialog,
         private toaster: toaster,
         private svc: CalendarService) {
     }
@@ -122,7 +126,30 @@ export class CalendarComponent implements OnInit {
         }
         else
             return;
+    }
 
-      
+    openUserProfilePopup(patient: Patient) {
+        const dialogRef = this.dialog.open(PatientProfilePopup, {
+            height: '70%',
+            width: '40%'
+        });
+        dialogRef.componentInstance.patientId = Number(patient.PatientId);
+
+        dialogRef.afterClosed().subscribe(result => {
+
+        });
+    }
+
+    openPatientFilePopup(patient: Patient) {
+        const dialogRef = this.dialog.open(PatientFilePopup, {
+            height: '75%',
+            width: '52%'
+        });
+        dialogRef.componentInstance._patientId = Number(patient.PatientId);
+
+        dialogRef.afterClosed().subscribe(result => {
+
+        });
     }
 }
+

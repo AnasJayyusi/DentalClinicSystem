@@ -13,7 +13,9 @@
     DateIsMissing,
     ChooseDate,
     AlreadyBooking,
-    NoPatientNow
+    NoPatientNow,
+    NoBillForToday,
+    RequiredFieldsMissingPatientFile
 }
 
  enum InvoiceType {

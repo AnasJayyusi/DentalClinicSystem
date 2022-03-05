@@ -53,12 +53,15 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
@@ -98,6 +101,7 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -180,6 +184,7 @@
     <Compile Include="Controllers\ControlPanelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OfficeProceduresController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -207,6 +212,7 @@
     <Content Include="Images\PageUnderConstruction.png" />
     <Content Include="Images\Reports.png" />
     <Content Include="Images\SeeAllPatients.png" />
+    <Content Include="Images\teeth.jpeg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="angular.json" />
@@ -224,6 +230,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\billing\billing.component.css" />
+    <Content Include="src\app\billing\billing.component.html" />
+    <Content Include="src\app\billing\billing.list.component.html" />
     <Content Include="src\app\calendar\calendar.component.css" />
     <Content Include="src\app\calendar\calendar.component.html" />
     <Content Include="src\app\patient\patient.component.html" />
@@ -232,6 +241,7 @@
     <Content Include="src\app\report\report.component.html" />
     <Content Include="src\app\reservation\booking.popup.component.html" />
     <Content Include="src\app\reservation\financial.record.popup.component.html" />
+    <Content Include="src\app\reservation\patient.profile.popup.component.html" />
     <Content Include="src\app\reservation\patient.file.popup.component.html" />
     <Content Include="src\app\reservation\reservation.component.html" />
     <Content Include="src\app\sharedStyle.css" />
@@ -307,6 +317,11 @@
     <Content Include="Styles\font-awesome\webfonts\fa-solid-900.ttf" />
     <Content Include="Styles\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="Styles\font-awesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="Views\OfficeProcedures\Create.cshtml" />
+    <Content Include="Views\OfficeProcedures\Delete.cshtml" />
+    <Content Include="Views\OfficeProcedures\Details.cshtml" />
+    <Content Include="Views\OfficeProcedures\Edit.cshtml" />
+    <Content Include="Views\OfficeProcedures\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -338,10 +353,15 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\billing\billing.component.ts" />
+    <TypeScriptCompile Include="src\app\billing\billing.list.component.ts" />
+    <TypeScriptCompile Include="src\app\billing\billing.service.component.ts" />
     <TypeScriptCompile Include="src\app\calendar\calendar.component.ts" />
     <TypeScriptCompile Include="src\app\calendar\calendart.service.component.ts" />
+    <TypeScriptCompile Include="src\app\customPipes.ts" />
     <TypeScriptCompile Include="src\app\report\report.component.ts" />
     <TypeScriptCompile Include="src\app\reservation\financial.record.popup.component.ts" />
+    <TypeScriptCompile Include="src\app\reservation\patient.profile.popup.component.ts" />
     <TypeScriptCompile Include="src\app\reservation\patient.file.popup.component.ts" />
     <TypeScriptCompile Include="src\app\toaster.ts" />
     <TypeScriptCompile Include="src\app\dateformat.ts" />

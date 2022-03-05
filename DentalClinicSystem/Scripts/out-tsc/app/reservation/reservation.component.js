@@ -8,6 +8,7 @@ import { BookingPopup } from './booking.popup.component';
 import { ReservationService } from './reservation.service.component';
 import { FinancialRecordPopup } from './financial.record.popup.component';
 import { PatientFilePopup } from './patient.file.popup.component';
+import { PatientProfilePopup } from './patient.profile.popup.component';
 let ReservationComponent = class ReservationComponent {
     // Ctor  + ngOnInIt
     constructor(svc, datepipe, commonSvc, dialog) {
@@ -114,9 +115,26 @@ let ReservationComponent = class ReservationComponent {
             this.getPatientsReservationsByKeyword();
         });
     }
-    openPatientFile(patient) {
-        const dialogRef = this.dialog.open(PatientFilePopup);
+    openPatientFilePopup(patient) {
+        const dialogRef = this.dialog.open(PatientFilePopup, {
+            height: '75%',
+            width: '52%'
+        });
+        dialogRef.componentInstance._patientId = Number(patient.PatientId);
         dialogRef.afterClosed().subscribe(result => {
+            this.param = patient.FullName.toString();
+            this.getPatientsReservationsByKeyword();
+        });
+    }
+    openUserProfilePopup(patient) {
+        const dialogRef = this.dialog.open(PatientProfilePopup, {
+            height: '65%',
+            width: '40%'
+        });
+        dialogRef.componentInstance.patientId = Number(patient.PatientId);
+        dialogRef.afterClosed().subscribe(result => {
+            this.param = patient.FullName.toString();
+            this.getPatientsReservationsByKeyword();
         });
     }
 };

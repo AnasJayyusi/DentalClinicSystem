@@ -6,14 +6,16 @@
 <h4>Change your website settings</h4>
 <hr />
 
-@Html.ActionLink("Change Password", "Index", "Manage", routeValues: null, htmlAttributes: new {  @Style = "font-size:large;color:#337ab7" })
+@Html.ActionLink("Change Password", "Index", "Manage", routeValues: null, htmlAttributes: new { @Style = "font-size:large;color:#337ab7" })
 <br />
 @Html.ActionLink("Register New User", "Register", "Account", routeValues: null, htmlAttributes: new { @Style = "font-size:large;color:#337ab7" })
 <br />
-<a style="font-size:large;color:#337ab7" >Add New Insurance </a>
+@Html.ActionLink("Add New Office Procedure", "Index", "OfficeProcedures", routeValues: null, htmlAttributes: new { @Style = "font-size:large;color:#337ab7" })
 <br />
-<a style="font-size:large;color:#337ab7">Add New Invoice Template </a>
+<a style="font-size:large;color:#337ab7 ; pointer-events: none; color: #dddddd;">Add New Insurance </a>
 <br />
-<a style="font-size:large;color:#337ab7">Add New Vacation Template </a>
+<a style="font-size: large; color: #337ab7; pointer-events: none; color: #dddddd;">Add New Invoice Template </a>
+<br />
+<a style="font-size: large; color: #337ab7; pointer-events: none; color: #dddddd;">Add New Vacation Template </a>
 
 

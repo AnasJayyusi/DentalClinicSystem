@@ -21,6 +21,10 @@ import { BookingPopup } from './reservation/booking.popup.component';
 import { FinancialRecordPopup } from './reservation/financial.record.popup.component';
 import { PatientFilePopup } from './reservation/patient.file.popup.component';
 import { ReportComponent } from './report/report.component';
+import { BillingComponent } from './billing/billing.component';
+import { BillingListComponent } from './billing/billing.list.component';
+import { ShortNamePipe } from './customPipes';
+import { PatientProfilePopup } from './reservation/patient.profile.popup.component';
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -30,11 +34,15 @@ AppModule = __decorate([
             CalendarComponent,
             PatientComponent,
             ReportComponent,
+            BillingComponent,
+            BillingListComponent,
             PatientListComponent,
             ReservationComponent,
             BookingPopup,
             FinancialRecordPopup,
-            PatientFilePopup
+            PatientFilePopup,
+            PatientProfilePopup,
+            ShortNamePipe
         ],
         imports: [
             BrowserModule, HttpClientModule,
@@ -49,7 +57,7 @@ AppModule = __decorate([
         ],
         providers: [{ provide: APP_BASE_HREF, useValue: '/DentalClinicSystem' }, DatePipe, toaster],
         bootstrap: [AppComponent],
-        entryComponents: [BookingPopup, FinancialRecordPopup, PatientFilePopup]
+        entryComponents: [BookingPopup, FinancialRecordPopup, PatientFilePopup, PatientProfilePopup]
     })
 ], AppModule);
 export { AppModule };

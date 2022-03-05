@@ -1,10 +1,11 @@
 ﻿
 using DentalClinic.DAL;
+using DentalClinic.Model.Entities.Billing;
+using DentalClinic.Model.Entities.Common;
 using DentalClinic.Model.Entities.Patients;
 using DentalClinic.Model.Entities.Reservation;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -34,7 +35,6 @@ namespace DentalClinic.DAL
             return new DentalClinicDbContext();
         }
 
-
         // DbSet here represent table in database
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<InsuranceType> InsuranceTypes { get; set; }
@@ -42,7 +42,8 @@ namespace DentalClinic.DAL
         public virtual DbSet<PatientFile> PatientFiles { get; set; }
         public virtual DbSet<Invoice> Invoices { get; set; }
         public virtual DbSet<FinancialRecord> FinancialRecords { get; set; }
-
+        public virtual DbSet<Bill> Bills { get; set; }
+        public virtual DbSet<OfficeProcedure> OfficeProcedures { get; set; }
     }
 }
 

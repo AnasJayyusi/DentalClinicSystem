@@ -1,5 +1,5 @@
 ﻿import { DatePipe } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { toaster } from '../toaster';
@@ -9,18 +9,19 @@ import { PatientService } from './patient.Service.component';
 
 
 @Component({
-    selector: 'patient-add',
+    selector: 'patient-addEditRead',
     templateUrl: './patient.component.html',
     styleUrls: ['../sharedStyle.css']
 })
 
-export class PatientComponent implements OnInit {
+export class PatientComponent implements OnInit, OnDestroy {
     // Object + Services
     insuranceTypes: InsuranceType[] = [];
-
+    @Input() mode: number; //  1: AddNew, 2: Edit, 3: ReadOnly
+    @Input() patientId: number;
     // Variables
     errors: any;
-    Title: string;
+    title: string;
     form: FormGroup;
     submitted = false;
     patient: Patient = new Patient();
@@ -39,21 +40,21 @@ export class PatientComponent implements OnInit {
     ngOnInit(): void {
         this.getInsuranceType()
         this.checkForm();
-        this.Title = "Add new patient info"
+        this.title = "Add new patient info"
         // For Edit Mode
-        if (this.svc._patientId != -1) {
+        if (this.svc._patientId != -1 || Number(this.mode) == 3) {
             this.getPatientById()
-            this.Title = "Edit patient nfo"
+            this.title = "Edit patient nfo"
             this.isEditMode = true;
         }
     }
-
     ngOnDestroy(): void {
         this.patient = new Patient();
         this.svc._patientId = -1
-        this.Title = "Add New Patient"
+        this.title = "Add New Patient"
         this.isEditMode = false;
     }
+
     // Gets / Sets
     get f(): { [key: string]: AbstractControl } {
         return this.form.controls;
@@ -78,8 +79,6 @@ export class PatientComponent implements OnInit {
                 insurancetypeId: [''],
             }
         );
-
-
     }
 
     // Dealing With Dom
@@ -99,7 +98,6 @@ export class PatientComponent implements OnInit {
             this.update();
         else
             this.add();
-
     }
 
     onReset(): void {
@@ -108,7 +106,6 @@ export class PatientComponent implements OnInit {
         this.submitted = false;
         this.form.reset();
         this.toaster.render(ValidationMessages.ResetAll)
-
     }
 
     // APIs
@@ -137,6 +134,7 @@ export class PatientComponent implements OnInit {
                     this.toaster.render(ValidationMessages.Error)
                 },
                 () => {
+                    if (this.mode != 3)
                     this.router.navigate(['Patient/PatientList'], { skipLocationChange: true });
                 }
             )
@@ -159,6 +157,9 @@ export class PatientComponent implements OnInit {
     }
 
     getPatientById() {
+        if (this.mode == 3)
+            this.svc._patientId = Number(this.patientId)
+
         this.svc.getPatientById(this.svc._patientId)
             .subscribe(
                 result => {
@@ -175,7 +176,7 @@ export class PatientComponent implements OnInit {
             );
     }
 
-    // Helper
+    // Mapping
     mappingObjToEntity(obj) {
         this.patient.FullName = obj.fullname;
         this.patient.Birthdate = new Date(obj.birthdate);

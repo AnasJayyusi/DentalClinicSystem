@@ -1,13 +1,17 @@
 import { __decorate, __metadata } from "tslib";
 import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { PatientFilePopup } from '../reservation/patient.file.popup.component';
+import { PatientProfilePopup } from '../reservation/patient.profile.popup.component';
 import { FullVisitInfo } from '../sharedDtos';
 import { ValidationMessages } from '../sharedEnum';
 import { toaster } from '../toaster';
 import { CalendarService } from './calendart.service.component';
 let CalendarComponent = class CalendarComponent {
     // Ctor  + ngOnInIt
-    constructor(toaster, svc) {
+    constructor(dialog, toaster, svc) {
+        this.dialog = dialog;
         this.toaster = toaster;
         this.svc = svc;
         // Variables
@@ -87,6 +91,24 @@ let CalendarComponent = class CalendarComponent {
         else
             return;
     }
+    openUserProfilePopup(patient) {
+        const dialogRef = this.dialog.open(PatientProfilePopup, {
+            height: '70%',
+            width: '40%'
+        });
+        dialogRef.componentInstance.patientId = Number(patient.PatientId);
+        dialogRef.afterClosed().subscribe(result => {
+        });
+    }
+    openPatientFilePopup(patient) {
+        const dialogRef = this.dialog.open(PatientFilePopup, {
+            height: '75%',
+            width: '52%'
+        });
+        dialogRef.componentInstance._patientId = Number(patient.PatientId);
+        dialogRef.afterClosed().subscribe(result => {
+        });
+    }
 };
 CalendarComponent = __decorate([
     Component({
@@ -94,7 +116,8 @@ CalendarComponent = __decorate([
         templateUrl: './calendar.component.html',
         styleUrls: ['calendar.component.css']
     }),
-    __metadata("design:paramtypes", [toaster,
+    __metadata("design:paramtypes", [MatDialog,
+        toaster,
         CalendarService])
 ], CalendarComponent);
 export { CalendarComponent };

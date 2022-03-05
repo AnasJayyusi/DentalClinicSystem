@@ -1,4 +1,10 @@
-﻿<h2 style="text-align:center" mat-dialog-title>Financial Record</h2>
+﻿
+<mat-dialog-actions align="end">
+    <button class="btn btn-danger" mat-dialog-close>X</button>
+</mat-dialog-actions>
+
+
+<h2 style="text-align:center" mat-dialog-title>Financial Record</h2>
 <mat-dialog-content class="mat-typography">
     <hr />
     <div style="text-align:center">
@@ -9,18 +15,61 @@
         <label style="color:red">Remaining: </label> <span style="color:red"> <strong> {{invoice?.Remaining}} JOD</strong></span>
     </div>
 
+    <br />
+    <!-- Bill & Payments -->
+    <div>
+        <div class="form-group ">
+            <div style="float:left;">
+                <label>Add Bill: <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> اضافة دفعة على المريض </b> </label>
+                <input style="background: lightsalmon " [(ngModel)]="transaction.BillAmount" placeholder="0.0 JOD" class="form-control" type="number" />
+            </div>
+            <div style="float:left;">
+                <label>Note: <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> اضافة ملاحظه </b> </label>
+                <input [(ngModel)]="transaction.BillComment" placeholder="Type here..." class="form-control" type="text" />
+            </div>
+        </div>
 
+        <br />
+
+        <div class="form-group ">
+            <div style="float:left;">
+                <label>Add Paid: <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> اضافة مبلغ تم تسديده </b> </label>
+                <input style="background: lightgreen" [(ngModel)]="transaction.PaidAmount" placeholder="0.0 JOD" class="form-control" type="number" />
+            </div>
+            &nbsp;
+            <div style="float:left;">
+                <label>Note: <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> اضافة ملاحظه </b> </label>
+                <input [(ngModel)]="transaction.PaidComment" placeholder="Type here..." class="form-control" type="text" />
+            </div>
+        </div>
+    </div>
+
+    <br />
+    <br />
+    <!-- Table -->
     <ng-container *ngIf="invoice != null && invoice.FinancialRecords != null && invoice.FinancialRecords.length > 0">
         <table class="table table-striped">
             <tr>
                 <th>Amount</th>
-                <th>Comment</th>
+                <th>Note</th>
                 <th>Payment Date</th>
+                <!--<th>Edit</th>-->
+                <th>Delete</th>
             </tr>
             <tr *ngFor="let item of invoice.FinancialRecords | paginate: { itemsPerPage: 3, currentPage: p }">
-                <td title="Red color for bill & green color for paid" [ngStyle]="{'background':item.InvoiceType == 0 ? 'red' : 'green' }">{{item.Amount}}</td>
-                <td>{{item.Comment}}</td>
+                <td title="Red color for bill & green color for paid" [ngStyle]="{'background':item.InvoiceType == 0 ? 'lightsalmon' : 'lightgreen' }">{{item.Amount}}</td>
+                <td>{{item.Comment == null ? 'لا يوجد'  : item.Comment}}</td>
                 <td>{{item.CreatedDate | date:'fullDate'}}</td>
+                <!--<td>
+                    <a style="color: orange; cursor: pointer; ">
+                        <span (click)="edit(item.Id)" class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>-->
+                <td align="center">
+                    <a style="color: red; cursor: pointer;">
+                        <span (click)="delete(item.Id)" class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
             </tr>
         </table>
         <pagination-controls style="text-align: center; padding:initial" [hidden]="invoice.FinancialRecords == 0" (pageChange)="p = $event"></pagination-controls>
@@ -31,30 +80,9 @@
         <h4 style="color:orange;text-align:center">There are no records for this patient</h4>
     </ng-container>
 
-    <br />
-
-    <div class="form-group ">
-        <label>Add Bill:</label>
-        <br />
-        <input [(ngModel)]="transaction.BillAmount" placeholder="Amount" class="form-control" type="number" />
-        <br />
-        <input [(ngModel)]="transaction.BillComment" placeholder="Comment" class="form-control" type="text" />
-    </div>
-    <br />
-
-    <div class="form-group ">
-        <label>Add Paid: </label>
-        <input [(ngModel)]="transaction.PaidAmount" placeholder="Amount" class="form-control" type="number" />
-        <br />
-        <input [(ngModel)]="transaction.PaidComment" placeholder="Comment" class="form-control" type="text" />
-    </div>
-
-
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <input type="button" class="btn btn-success" (click)="addNewInvoice()" value="Save" />
     &nbsp;
     <button class="btn btn-warning" mat-dialog-close>Cancal</button>
-
-
 </mat-dialog-actions>

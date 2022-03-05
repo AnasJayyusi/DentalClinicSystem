@@ -11,14 +11,15 @@ namespace ClinicSystem.API.Services
     public class CalendarService
     {
         CalendarRepository _calendarRepository;
-     
+        ReservationRepository ReservationRepository;
+
         public CalendarService()
         {
             _calendarRepository = new CalendarRepository();
         }
         internal List<LiteVisitInfo> GetTodayPatients()
         {
-           return  _calendarRepository.GetTodayPatients();
+            return _calendarRepository.GetTodayPatients();
         }
 
         internal List<LiteVisitInfo> GetTomorrowPatients()
@@ -34,6 +35,21 @@ namespace ClinicSystem.API.Services
         internal void DeleteAppointment(int visitId)
         {
             _calendarRepository.DeleteAppointment(visitId);
+        }
+
+        internal void DeletePatientRecord(int recordId)
+        {
+            _calendarRepository.DeletePatientRecord(recordId);
+        }
+
+        internal List<PatientFile> GetPatientFileById(int patientId)
+        {
+            return _calendarRepository.GetPatientFileRecords(patientId);
+        }
+
+        internal void SavePatientRecord(PatientFile patientFile)
+        {
+                _calendarRepository.AddPatientRecord(patientFile);
         }
     }
 }

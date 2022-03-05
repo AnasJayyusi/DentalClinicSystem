@@ -22,16 +22,38 @@ namespace DentalClinic.Repository
                                            .Select(x => new LiteVisitInfo()
                                            {
                                                PatientId = x.PatientId,
+                                               IsPatientDeleted = x.Patient.IsDeleted,
                                                VisitId = x.Id,
                                                PatientName = x.Patient.FullName,
                                                VisitTime = x.VisitTime.Value,
                                                PhoneNumber = x.Patient.PhoneNumber
                                            })
+                                           .Where(x => x.IsPatientDeleted == false)
                                            .OrderBy(x => x.VisitTime)
                                            .ToList();
 
             return visits;
 
+        }
+
+        public void AddPatientRecord(PatientFile patientFile)
+        {
+            _dbContext.PatientFiles.Add(patientFile);
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdatePatientRecord(PatientFile patientFile)
+        {
+            var obj = _dbContext.PatientFiles.Single(p => p.PatientId == patientFile.Id);
+            // Set new values
+            obj.UpdateDate = DateTime.Now;
+            obj.OfficeProcedure = patientFile.OfficeProcedure;
+            obj.Qty = patientFile.Qty;
+            obj.Price = patientFile.Price;
+            obj.ToothCode = patientFile.ToothCode;
+            obj.Comment = patientFile.Comment;
+            obj.Date = patientFile.Date;
+            _dbContext.SaveChanges();
         }
 
         public List<LiteVisitInfo> GetTomorrowPatients()
@@ -44,11 +66,13 @@ namespace DentalClinic.Repository
                                         .Select(x => new LiteVisitInfo()
                                         {
                                             PatientId = x.PatientId,
+                                            IsPatientDeleted = x.Patient.IsDeleted,
                                             VisitId = x.Id,
                                             PatientName = x.Patient.FullName,
                                             VisitTime = x.VisitTime.Value,
                                             PhoneNumber = x.Patient.PhoneNumber
                                         })
+                                        .Where(x => x.IsPatientDeleted == false)
                                         .OrderBy(x => x.VisitTime)
                                         .ToList();
             return visits;
@@ -74,6 +98,27 @@ namespace DentalClinic.Repository
             Visit visit = _dbContext.Visits.Single(x => x.Id == visitId);
             _dbContext.Visits.Remove(visit);
             _dbContext.SaveChanges();
+        }
+
+
+        public void DeletePatientRecord(int recordId)
+        {
+            PatientFile patientFile = _dbContext.PatientFiles.Single(x => x.Id == recordId);
+            _dbContext.PatientFiles.Remove(patientFile);
+
+            Invoice invoice = _dbContext.Invoices.SingleOrDefault(x => x.PatientId == patientFile.PatientId);
+            invoice.FullPrice -= patientFile.Price;
+
+            FinancialRecord record = _dbContext.FinancialRecords.First(x => x.InvoiceType == InvoiceType.Bill && x.Amount == patientFile.Price);
+            _dbContext.FinancialRecords.Remove(record);
+
+            _dbContext.SaveChanges();
+
+        }
+
+        public List<PatientFile> GetPatientFileRecords(int patientId)
+        {
+            return _dbContext.PatientFiles.Where(x => x.PatientId == patientId).ToList();
         }
 
     }

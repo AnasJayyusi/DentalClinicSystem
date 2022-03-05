@@ -1,12 +1,7 @@
-﻿using DentalClinic.DAL;
-using DentalClinic.Model.Entities.Patients;
+﻿using DentalClinic.Model.Entities.Patients;
 using System;
 using System.Collections.Generic;
-using System.Data.Linq.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
 
 
 namespace DentalClinic.Repository
@@ -39,10 +34,23 @@ namespace DentalClinic.Repository
 
         public void DeletePatient(int id)
         {
-            var obj = _dbContext.Patients.Single(p => p.Id == id);
+            var financialRecords = _dbContext.FinancialRecords.Where(p => p.Invoice_PatientId == id).ToList();
+            _dbContext.FinancialRecords.RemoveRange(financialRecords);
 
-            // Logical delete
-            obj.IsDeleted = true;
+            var invoice = _dbContext.Invoices.Single(p => p.PatientId == id);
+            _dbContext.Invoices.Remove(invoice);
+
+            var visits = _dbContext.Visits.Where(p => p.PatientId == id).ToList();
+            _dbContext.Visits.RemoveRange(visits);
+
+            var patientFiles= _dbContext.PatientFiles.Where(x=>x.PatientId == id).ToList();
+            _dbContext.PatientFiles.RemoveRange(patientFiles);
+
+            _dbContext.Invoices.Remove(invoice);
+
+            var patient = _dbContext.Patients.Single(p => p.Id == id);
+            _dbContext.Patients.Remove(patient);
+
             _dbContext.SaveChanges();
         }
 
