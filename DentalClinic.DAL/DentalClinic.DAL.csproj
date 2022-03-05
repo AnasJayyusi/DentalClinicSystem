@@ -74,9 +74,21 @@
     <Compile Include="Migrations\202201232034042_AddReservationsTables.designer.cs">
       <DependentUpon>202201232034042_AddReservationsTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202201312021561_AddFinancialRecordTable.cs" />
-    <Compile Include="Migrations\202201312021561_AddFinancialRecordTable.designer.cs">
-      <DependentUpon>202201312021561_AddFinancialRecordTable.cs</DependentUpon>
+    <Compile Include="Migrations\202202261433519_AddTablesForBilling.cs" />
+    <Compile Include="Migrations\202202261433519_AddTablesForBilling.designer.cs">
+      <DependentUpon>202202261433519_AddTablesForBilling.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203041925551_AddProcedureTable.cs" />
+    <Compile Include="Migrations\202203041925551_AddProcedureTable.designer.cs">
+      <DependentUpon>202203041925551_AddProcedureTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203042016594_SetColumnToBeNullable.cs" />
+    <Compile Include="Migrations\202203042016594_SetColumnToBeNullable.designer.cs">
+      <DependentUpon>202203042016594_SetColumnToBeNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202203050007229_AddNoteToBillTable.cs" />
+    <Compile Include="Migrations\202203050007229_AddNoteToBillTable.designer.cs">
+      <DependentUpon>202203050007229_AddNoteToBillTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,8 +110,17 @@
     <EmbeddedResource Include="Migrations\202201232034042_AddReservationsTables.resx">
       <DependentUpon>202201232034042_AddReservationsTables.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202201312021561_AddFinancialRecordTable.resx">
-      <DependentUpon>202201312021561_AddFinancialRecordTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202261433519_AddTablesForBilling.resx">
+      <DependentUpon>202202261433519_AddTablesForBilling.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203041925551_AddProcedureTable.resx">
+      <DependentUpon>202203041925551_AddProcedureTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203042016594_SetColumnToBeNullable.resx">
+      <DependentUpon>202203042016594_SetColumnToBeNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202203050007229_AddNoteToBillTable.resx">
+      <DependentUpon>202203050007229_AddNoteToBillTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -38,6 +38,12 @@ namespace DentalClinic.Model.Entities.Patients
         public Invoice Invoice { get; set; }
         public List<Visit> Visits { get; set; }
         public List<PatientFile> PatientFiles { get; set; }
+
+        [NotMapped]
+        public int Age
+        {
+            get { return DateTime.Now.Year - this.Birthdate.Year; }
+        }
     }
 }
 public enum Gender

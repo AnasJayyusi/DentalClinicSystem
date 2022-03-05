@@ -40,12 +40,17 @@ namespace DentalClinic.Repository
                            Invoice = p.Invoice
                        }).Where(x => x.FullName.Contains(parm) || x.PhoneNumber.Contains(parm)).ToList();
         }
-
         public List<string> GetAvailableHours(Booking booking)
         {
-            List<string> workingHours = new List<string>() { "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00" };
+            List<string> workingHours = new List<string>() {
+                "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00", "15:30",
+                "16:00","16:30", "17:00" };
 
-            List<DateTime?> reservedDateTime = _dbContext.Visits.Where(x => DbFunctions.TruncateTime(booking.BookingTime) == DbFunctions.TruncateTime(x.VisitTime)).Select(x => x.VisitTime).ToList();
+            List<DateTime?> reservedDateTime = _dbContext.Visits
+                                                          .Where(x => DbFunctions.TruncateTime(booking.BookingTime) == DbFunctions.TruncateTime(x.VisitTime))
+                                                          .Select(x => x.VisitTime)
+                                                          .ToList();
 
 
             List<string> reservedHours = new List<string>();
@@ -57,6 +62,37 @@ namespace DentalClinic.Repository
 
             List<string> availableHours = workingHours.Except(reservedHours).ToList();
             return availableHours;
+        }
+
+        public List<LiteVisitInfo> GetNextPatientVisit(int patientId)
+        {
+            DateTime today = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day);
+            List<LiteVisitInfo> lastVisit = _dbContext.Visits
+                                           .Where(b => DbFunctions.TruncateTime(b.VisitTime) >= DbFunctions.TruncateTime(today))
+                                           .Include(x => x.Patient)
+                                           .Select(x => new LiteVisitInfo()
+                                           {
+                                               PatientId = x.PatientId,
+                                               VisitId = x.Id,
+                                               PatientName = x.Patient.FullName,
+                                               VisitTime = x.VisitTime.Value,
+                                               PhoneNumber = x.Patient.PhoneNumber
+                                           })
+                                           .OrderBy(x => x.VisitTime)
+                                           .Where(x => x.PatientId == patientId)
+                                           .ToList();
+
+            return lastVisit;
+        }
+
+        public List<ProcedureNameDto> GetProceduresNames()
+        {
+            return _dbContext.OfficeProcedures
+                .Select(x => new ProcedureNameDto
+                {
+                    Price = x.Price,
+                    ProcedureName = x.ProcedureName
+                }).ToList();
         }
 
         public void BookNewAppointment(Booking booking)
@@ -72,11 +108,19 @@ namespace DentalClinic.Repository
             _dbContext.SaveChanges();
         }
 
-        public Invoice GetFinancialRecord(int patientId)
+        public Invoice GetInvoice(int patientId)
         {
-            return _dbContext.Invoices
-                             .Include(x => x.FinancialRecords)
+
+            Invoice invoice = _dbContext.Invoices
                              .SingleOrDefault(x => patientId == x.PatientId);
+
+            return invoice;
+
+        }
+        public List<FinancialRecord> GetFinancialRecord(int patientId)
+        {
+            return _dbContext.FinancialRecords.Where(x => x.Invoice_PatientId == patientId)
+                                              .ToList();
         }
 
         public void AddNewInvoice(Invoice invoice)
@@ -85,6 +129,28 @@ namespace DentalClinic.Repository
             _dbContext.SaveChanges();
         }
 
+        public void AddFinancialRecord(List<FinancialRecord> financialRecords, int patientId)
+        {
+            List<FinancialRecord> RemovedfinancialRecords = _dbContext.FinancialRecords
+                                                                      .Where(x => x.Invoice_PatientId == patientId)
+                                                                      .ToList();
+
+            _dbContext.FinancialRecords.RemoveRange(RemovedfinancialRecords);
+            _dbContext.FinancialRecords.AddRange(financialRecords);
+            _dbContext.SaveChanges();
+        }
+
+        public void AddFinancialRecord(FinancialRecord financialRecord, int patientId)
+        {
+            List<FinancialRecord> originalList = _dbContext.FinancialRecords
+                                                           .Where(x => x.Invoice_PatientId == patientId)
+                                                           .ToList();
+                                                       
+            _dbContext.FinancialRecords.RemoveRange(originalList);
+            originalList.Add(financialRecord);
+            _dbContext.FinancialRecords.AddRange(originalList);
+            _dbContext.SaveChanges();
+        }
 
         public void UpdateInvoice(Invoice invoice)
         {
@@ -94,6 +160,21 @@ namespace DentalClinic.Repository
             dbInvoice.Paid = invoice.Paid;
             dbInvoice.FinancialRecords = invoice.FinancialRecords;
 
+            _dbContext.SaveChanges();
+        }
+
+        public void UpdateInvoiceFullPrice(int patientId, decimal price)
+        {
+            Invoice dbInvoice = _dbContext.Invoices.Find(patientId);
+            dbInvoice.FullPrice += price;
+            _dbContext.SaveChanges();
+        }
+
+
+        public void DeleteFinancialRecord(int recordId)
+        {
+            var obj = _dbContext.FinancialRecords.Single(p => p.Id == recordId);
+            _dbContext.FinancialRecords.Remove(obj);
             _dbContext.SaveChanges();
         }
 

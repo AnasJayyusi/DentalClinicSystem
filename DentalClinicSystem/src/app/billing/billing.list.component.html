@@ -1,0 +1,129 @@
+﻿<div id="parentDiv">
+    <div class="input-group">
+        <div class="form-group col-md-8 offset-4">
+            <label>Select month <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> اختر الشهر لحساب الدخل و المصاريف </b> </label>
+            <div class="input-group">
+                <input class="form-control"
+                       type="month"
+                       (change)="getBillsByPeriods()"
+                       [(ngModel)]="datePeriod">
+            </div>
+        </div>
+        <div style="width: 100%;">
+            <!--Income Table-->
+            <div style="width: 14%; float: left;">
+                <div class="alert alert-success ">
+
+                    <table class="table table-striped">
+                        <tr>
+                            <td colspan="10">Income</td>
+                        </tr>
+                        <tr>
+                            <th>Amount </th>
+                        </tr>
+                        <tr>
+                            <td>{{totalIncome}} JOD</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <!-- Expenses Table -->
+            <div style="margin-left: 14%; height: 100px">
+                <div class="alert alert-danger ">
+                    <ng-container *ngIf="isBusy">
+                        <div>
+                            <mat-spinner class="progress"></mat-spinner>
+                            <label>Please Wait ...</label>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!isBusy">
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Expenses</td>
+                            </tr>
+                            <tr>
+                                <th>Salaries </th>
+                                <th>Meterial </th>
+                                <th>Rent </th>
+                                <th>Electricity</th>
+                                <th>Water</th>
+                                <th>Tax </th>
+                                <th>Amman </th>
+                                <th>Clinic </th>
+                                <th>Other</th>
+                                <th>Total Amount</th>
+                            </tr>
+                            <tr>
+                                <td>{{billsAmount.SalariesAmount}}</td>
+                                <td>{{billsAmount.MeterialAmount}}</td>
+                                <td>{{billsAmount.RentAmount}}</td>
+                                <td>{{billsAmount.ElectricityBillsAmount}}</td>
+                                <td>{{billsAmount.WaterBillsAmount}}</td>
+                                <td>{{billsAmount.TaxAmount}}</td>
+                                <td>{{billsAmount.AmmanMunicipalityAmount}}</td>
+                                <td>{{billsAmount.ClinicConsumablesAmount}}</td>
+                                <td>{{billsAmount.OtherAmount}}</td>
+                                <td>{{billsAmount.TotalAmount}} JOD</td>
+                            </tr>
+                        </table>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>
+
+<div id="childDiv">
+    <div class="text-center">
+        <div class="input-group">
+            <input type="date" (keypress)="search($event)" [(ngModel)]="param" class="form-control" placeholder="Search.." name="search">
+            <div class="input-group-btn">
+                <button class="btn btn-default btn-lg" style="cursor: pointer;" (click)="search('Enter')" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                <button class="btn btn-default btn-lg" style="cursor: pointer;" (click)="search('Refresh')" type="submit"><i class="glyphicon glyphicon-refresh"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="list">
+        <table class="table table-striped">
+            <tr>
+                <th width="15%">BillDate </th>
+                <th width="8%">Salary </th>
+                <th width="8%">Meterial </th>
+                <th width="8%">Rent</th>
+                <th width="8%">Electricity</th>
+                <th width="8%">Water </th>
+                <th width="8%">Tax </th>
+                <th width="8%">Amman Municipality</th>
+                <th width="8%">Clinic Consumables</th>
+                <th width="8%">Other</th>
+                <th width="7%">Edit</th>
+                <th width="7%">Delete</th>
+            </tr>
+            <tr *ngFor="let item of bills | paginate: { itemsPerPage: pageSize, currentPage: pageNumber ,totalItems: total }">
+                <td width="15%">{{item.BillDate  | date}}</td>
+                <td width="8%">{{item.Salary}}</td>
+                <td width="8%">{{item.Meterial}}</td>
+                <td width="8%">{{item.Rent}}</td>
+                <td width="8%">{{item.Electricity}}</td>
+                <td width="8%">{{item.Water}}</td>
+                <td width="8%">{{item.Tax}}</td>
+                <td width="8%">{{item.AmmanMunicipality}}</td>
+                <td width="8%">{{item.ClinicConsumables}}</td>
+                <td width="8%">{{item.Other}}</td>
+                <td width="7%">
+                    <a style="color: orange; cursor: pointer; ">
+                        <span (click)="edit(item.Id,item.BillDate)" class="glyphicon glyphicon-edit"></span>
+                    </a>
+                </td>
+                <td width="7%" align="center">
+                    <a style="color: red; cursor: pointer;">
+                        <span (click)="delete(item.Id)" class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+        <pagination-controls style="text-align: center;" [hidden]="bills==0" (pageChange)="pageChanged($event)"></pagination-controls>
+    </div>
+</div>

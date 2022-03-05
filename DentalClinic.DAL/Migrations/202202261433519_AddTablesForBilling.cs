@@ -3,12 +3,35 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddFinancialRecordTable : DbMigration
+    public partial class AddTablesForBilling : DbMigration
     {
         public override void Up()
         {
             DropForeignKey("dbo.Invoices", "PatientId", "dbo.Patients");
             DropPrimaryKey("dbo.Invoices");
+            CreateTable(
+                "dbo.Bills",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        BillDate = c.DateTime(nullable: false),
+                        Salary = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Meterial = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Rent = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Electricity = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Water = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Tax = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        AmmanMunicipality = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ClinicConsumables = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Other = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        CreatedDate = c.DateTime(),
+                        UpdateDate = c.DateTime(),
+                        CreatedBy = c.String(),
+                        UpdatedBy = c.String(),
+                        IsDeleted = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.FinancialRecords",
                 c => new
@@ -17,12 +40,12 @@
                         Amount = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Comment = c.String(),
                         InvoiceType = c.Int(nullable: false),
+                        Invoice_PatientId = c.Int(),
                         CreatedDate = c.DateTime(),
                         UpdateDate = c.DateTime(),
                         CreatedBy = c.String(),
                         UpdatedBy = c.String(),
                         IsDeleted = c.Boolean(nullable: false),
-                        Invoice_PatientId = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Invoices", t => t.Invoice_PatientId)
@@ -51,6 +74,7 @@
             DropIndex("dbo.FinancialRecords", new[] { "Invoice_PatientId" });
             DropPrimaryKey("dbo.Invoices");
             DropTable("dbo.FinancialRecords");
+            DropTable("dbo.Bills");
             AddPrimaryKey("dbo.Invoices", "Id");
             AddForeignKey("dbo.Invoices", "PatientId", "dbo.Patients", "Id", cascadeDelete: true);
         }

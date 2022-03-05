@@ -1,4 +1,4 @@
-﻿<h1 style="text-align:center">{{Title}}</h1>
+﻿<h1 class="titleStyle">{{title}}</h1>
 <hr />
 
 <div>
@@ -33,8 +33,7 @@
                 <input class="form-control"
                        type="date"
                        formControlName="birthdate"
-                       [ngClass]="{ 'is-invalid': submitted && f.birthdate.errors }"
-                       [(ngModel)]="model">
+                       [ngClass]="{ 'is-invalid': submitted && f.birthdate.errors }">
             </div>
         </div>
 
@@ -70,16 +69,18 @@
         <!-- Surgeries -->
         <div class="col-md-12">
             <div class="form-group col-md-6" style="padding:0px;">
-                <label>Surgeries</label>
+                <label>Procedures</label>
                 <textarea formControlName="surgeries"
-                          class="form-control" placeholder="Enter text here..." rows="4" cols="50" name="comment" form="usrform"></textarea>
+                         id ="note" 
+                          class="form-control" placeholder="Add procedures here..." rows="4" cols="50" name="comment" form="usrform"></textarea>
             </div>
 
             <!-- Medicines -->
             <div class="form-group col-md-6">
-                <label>Medicines</label>
+                <label>Medical History</label>
                 <textarea formControlName="medicines"
-                          class="form-control" placeholder="Add text here..." rows="4" cols="50" name="comment" form="usrform"></textarea>
+                          id ="note" 
+                          class="form-control" placeholder="Add medical History..." rows="4" cols="50" name="comment" form="usrform"></textarea>
             </div>
         </div>
         <!-- Insurance Type -->
@@ -100,11 +101,11 @@
         </div>
         <!-- Save -->
         <div class="col-md-offset-9">
-            <button *ngIf="!isEditMode" style="margin:5px" type="submit" class="btn btn-primary btn-lg">Save</button>
-            <button *ngIf="isEditMode" style="margin:5px" type="submit" class="btn btn-success btn-lg">Update</button>
-            <button [ngClass]="{ 'disabled ': isEditMode  }" [ngStyle]="isEditMode && {'cursor': 'no-drop'}" type="button"
+            <button *ngIf="!isEditMode" style="margin:5px ; font-size:larger" type="submit" class="btn btn-primary btn-lg">Save</button>
+            <button *ngIf="isEditMode" style="margin: 5px; font-size: larger" type="submit" class="btn btn-success btn-lg">Update</button>
+            <button *ngIf="mode != 3"  [ngClass]="{ 'disabled ': isEditMode  }" [ngStyle]="isEditMode && {'cursor': 'no-drop'}" type="button"
                     (click)="onReset()"
-                    class="btn btn-warning">
+                    class="btn btn-warning  btn-lg">
                 Reset
             </button>
         </div>
@@ -112,6 +113,7 @@
 
 
 </div>
-<div style="text-align: end;">
+
+<div *ngIf="mode != 3" style="text-align: end;">
     <a routerLink="PatientList" routerLinkActive="active" skipLocationChange="true"><img src="http://localhost/DentalClinicSystem/Images/SeeAllPatients.png" title="See all patients" height="50" width="50"> </a>
 </div>

@@ -84,8 +84,11 @@
     <Compile Include="Dtos\FullVisitInfo.cs" />
     <Compile Include="Dtos\PatientReservation.cs" />
     <Compile Include="Dtos\LiteVisitInfo.cs" />
+    <Compile Include="Dtos\ProcedureNameDto.cs" />
     <Compile Include="Entities\Accounts\AccountViewModels.cs" />
     <Compile Include="Entities\Accounts\ManageViewModels.cs" />
+    <Compile Include="Entities\Billing\Bill.cs" />
+    <Compile Include="Entities\Common\OfficeProcedure.cs" />
     <Compile Include="Entities\IBaseEntity.cs" />
     <Compile Include="Entities\Patients\InsuranceType.cs" />
     <Compile Include="Entities\Patients\Patient.cs" />

@@ -40,6 +40,7 @@ export class Invoice {
 }
 
 export class FinancialRecord {
+    Id: Number;
     Amount: Number;
     Comment: String;
     InvoiceType: InvoiceType;
@@ -47,7 +48,7 @@ export class FinancialRecord {
 }
 
 export class Transaction {
-    BillAmount: Number ;
+    BillAmount: Number;
     BillComment: String;
     PaidAmount: Number;
     PaidComment: String;
@@ -75,9 +76,54 @@ export class FullVisitInfo {
 
 export class LiteVisitInfo {
     PatientId: Number;
+    VisitId: Number;
     PatientName: String;
     VisitTime: Date;
-    PhoneNumber : Number;
+    PhoneNumber: Number;
+}
+
+
+export class Bill {
+    Id: number;
+    BillDate: Date;
+    Salary: number;
+    Meterial: number;
+    Rent: number;
+    Electricity: number
+    Water: number;
+    Tax: number;
+    AmmanMunicipality: number;
+    ClinicConsumables: number;
+    Other: number;
+    Note: string;
+}
+
+export class BillsAmount {
+    SalariesAmount: number = 0;
+    MeterialAmount: number = 0;
+    RentAmount: number = 0;
+    ElectricityBillsAmount: number = 0;
+    WaterBillsAmount: number = 0;
+    TaxAmount: number = 0;
+    AmmanMunicipalityAmount: number = 0;
+    ClinicConsumablesAmount: number = 0;
+    OtherAmount: number = 0;
+    TotalAmount: number = 0;
+}
+export class PatientFile {
+    Id: number;
+    PatientId: number;
+    OfficeProcedure: string;
+    Qty: number;
+    Price: number;
+    ToothCode: number;
+    Comment: string;
+    Date: Date;
+}
+
+export class ProceduresName {
+    ProcedureName: string;
+    Price: number;
 }
 
 // Enums

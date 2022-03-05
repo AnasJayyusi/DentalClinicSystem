@@ -1,12 +1,8 @@
 ﻿using ClinicSystem.API.Services;
 using DentalClinic.Model.Dtos;
-using DentalClinic.Model.Entities.Patients;
 using DentalClinic.Model.Entities.Reservation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ClinicSystem.API.Controllers
@@ -49,7 +45,6 @@ namespace ClinicSystem.API.Controllers
             }
         }
 
-
         [Route("BookNewAppointment")]
         [HttpPost]
         public IHttpActionResult BookNewAppointment(Booking booking)
@@ -80,6 +75,35 @@ namespace ClinicSystem.API.Controllers
             }
         }
 
+        [Route("GetNextPatientVisit/{patientId}")]
+        [HttpGet]
+        public IHttpActionResult GetNextPatientVisit(int patientId)
+        {
+            try
+            {
+                List<LiteVisitInfo> visits = _reservationService.GetNextPatientVisit(patientId);
+                return Ok(visits);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetInvoice/{patientId}")]
+        [HttpGet]
+        public IHttpActionResult GetInvoice(int patientId)
+        {
+            try
+            {
+                Invoice invoice = _reservationService.GetInvoice(patientId);
+                return Ok(invoice);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
         [Route("GetFinancialRecord/{patientId}")]
         [HttpGet]
@@ -87,8 +111,8 @@ namespace ClinicSystem.API.Controllers
         {
             try
             {
-                Invoice financialrecord = _reservationService.GetFinancialrecord(patientId);
-                return Ok(financialrecord);
+                List<FinancialRecord> financialrecords = _reservationService.GetFinancialRecord(patientId);
+                return Ok(financialrecords);
             }
             catch (Exception ex)
             {
@@ -104,6 +128,36 @@ namespace ClinicSystem.API.Controllers
             {
                 _reservationService.SaveInvoice(invoice);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("DeleteFinancialRecord/{recordId}")]
+        [HttpGet]
+        public IHttpActionResult DeleteFinancialRecord(int recordId)
+        {
+            try
+            {
+                _reservationService.DeleteFinancialRecord(recordId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Route("GetProceduresNames")]
+        [HttpGet]
+        public IHttpActionResult GetProceduresNames()
+        {
+            try
+            {
+                List<ProcedureNameDto> procedureNameDtos = _reservationService.GetProceduresNames();
+                return Ok(procedureNameDtos);
             }
             catch (Exception ex)
             {

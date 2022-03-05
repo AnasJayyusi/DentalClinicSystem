@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BillingRepository.cs" />
     <Compile Include="CalendarRepository.cs" />
     <Compile Include="DbContext.cs" />
     <Compile Include="PatientRepository.cs" />

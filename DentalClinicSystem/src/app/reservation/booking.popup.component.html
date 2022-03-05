@@ -1,38 +1,109 @@
-﻿<h2 style="text-align:center" mat-dialog-title>Booking New Appointment</h2>
+﻿
+<mat-dialog-actions align="end">
+    <button class="btn btn-danger" mat-dialog-close>X</button>
+</mat-dialog-actions>
+
+
+
+<h2 style="text-align:center" mat-dialog-title>Booking New Appointment</h2>
 <mat-dialog-content class="mat-typography">
     <hr />
-    <div style="align-content:center">
-        <label>Choose Date</label> &nbsp;
-        <input (change)="getAvailableHours()" [(ngModel)]="bookDate" type="date">
+
+    <div *ngIf="hasAlreadyAppointment">
+        <div class="alert alert-info" role="alert">
+            <label>This patient has already appointments  <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle">هذا المريض لديه موعد محجوز </b> </label>
+        </div>
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Datetime</th>
+                    <th>Remove</th>
+                </tr>
+                <tr *ngFor="let item of visits">
+                    <td>{{item.VisitTime | date: 'dd/MM/yyyy hh:mm a'}}</td>
+                    <td style="text-align:center">
+                        <a style="color: red; cursor: pointer; text-align:center">
+                            <span (click)="deleteAppointment(item.VisitId)" class="glyphicon glyphicon-remove"></span>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group ">
+        <div>
+            <label>Choose Date <span class="glyphicon glyphicon-exclamation-sign helpStyle"> </span> <b class="helpStyle"> اختر يوم للحجز </b> </label>
+            <div class="input-group">
+                <input class="form-control"
+                       type="date"
+                       (change)="getAvailableHours()"
+                       [(ngModel)]="bookDate">
+            </div>
+        </div>
     </div>
     <br />
     <div (click)="showWarningMessage()" [ngClass]="{ 'disabledDiv ': !isDateSelected  }">
         <h3>Morning: </h3>
-        <input type="radio" value="10:00" [(ngModel)]="bookTime" />
-        <label [ngStyle]="{'color':isTimeAvalaible('10:00') ? 'green' : 'red' }">&nbsp; 10:00 AM</label>  &nbsp;
+        <div>
+            <input type="radio" value="10:00" [(ngModel)]="bookTime" />
+            <label [ngStyle]="{'color':isTimeAvalaible('10:00') ? 'green' : 'red' }">&nbsp; 10:00 AM</label>  &nbsp;
 
-        <input type="radio" value="11:00" [(ngModel)]="bookTime" />
-        <label [ngStyle]="{'color':isTimeAvalaible('11:00') ? 'green' : 'red' }">&nbsp; 11:00 AM</label> &nbsp;
+            <input type="radio" value="10:30" [(ngModel)]="bookTime" />
+            <label [ngStyle]="{'color':isTimeAvalaible('10:30') ? 'green' : 'red' }">&nbsp; 10:30 AM</label>  &nbsp;
 
-        <input type="radio" value="12:00" [(ngModel)]="bookTime" />
-        <label [ngStyle]="{'color':isTimeAvalaible('12:00') ? 'green' : 'red' }">&nbsp; 12:00 AM</label> &nbsp;
-        <br />
 
+            <input type="radio" value="11:00" [(ngModel)]="bookTime" />
+            <label [ngStyle]="{'color':isTimeAvalaible('11:00') ? 'green' : 'red' }">&nbsp; 11:00 AM</label> &nbsp;
+
+            <br />
+
+            <input type="radio" value="11:30" [(ngModel)]="bookTime" />
+            <label [ngStyle]="{'color':isTimeAvalaible('11:30') ? 'green' : 'red' }">&nbsp; 11:30 AM</label> &nbsp;
+
+            <input type="radio" value="12:00" [(ngModel)]="bookTime" />
+            <label [ngStyle]="{'color':isTimeAvalaible('12:00') ? 'green' : 'red' }">&nbsp; 12:00 AM</label> &nbsp;
+
+
+            <br />
+
+        </div>
         <h3>Evening: </h3>
+
+        <input type="radio" value="12:30" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('12:30') ? 'green' : 'red' }">&nbsp; 12:30 PM</label> &nbsp;
+
         <input type="radio" value="13:00" [(ngModel)]="bookTime" />
         <label [ngStyle]="{'color':isTimeAvalaible('13:00') ? 'green' : 'red' }">&nbsp; 01:00 PM</label> &nbsp;
+
+        <input type="radio" value="13:30" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('13:30') ? 'green' : 'red' }">&nbsp; 01:30 PM</label> &nbsp;
 
         <input type="radio" value="14:00" [(ngModel)]="bookTime" />
         <label [ngStyle]="{'color':isTimeAvalaible('14:00') ? 'green' : 'red' }">&nbsp; 02:00 PM</label> &nbsp;
 
+        <br />
+
+        <input type="radio" value="14:30" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('14:30') ? 'green' : 'red' }">&nbsp; 02:30 PM</label> &nbsp;
+
         <input type="radio" value="15:00" [(ngModel)]="bookTime" />
         <label [ngStyle]="{'color':isTimeAvalaible('15:00') ? 'green' : 'red' }">&nbsp; 03:00 PM</label> &nbsp;
+
+        <input type="radio" value="15:30" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('15:30') ? 'green' : 'red' }">&nbsp; 03:30 PM</label> &nbsp;
+
+        <br />
 
         <input type="radio" value="16:00" [(ngModel)]="bookTime" />
         <label [ngStyle]="{'color':isTimeAvalaible('16:00') ? 'green' : 'red' }">&nbsp; 04:00 PM</label> &nbsp;
 
-        <input type="radio" value="17:00" [(ngModel)]="bookTime" />
-        <label [ngStyle]="{'color':isTimeAvalaible('17:00') ? 'green' : 'red' }">&nbsp; 05:00 PM</label> &nbsp;
+        <input type="radio" value="16:30" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('16:30') ? 'green' : 'red' }">&nbsp; 04:30 PM</label> &nbsp;
+
+        <!--<input type="radio" value="17:00" [(ngModel)]="bookTime" />
+        <label [ngStyle]="{'color':isTimeAvalaible('17:00') ? 'green' : 'red' }">&nbsp; 05:00 PM</label> &nbsp;-->
     </div>
 
     <br />

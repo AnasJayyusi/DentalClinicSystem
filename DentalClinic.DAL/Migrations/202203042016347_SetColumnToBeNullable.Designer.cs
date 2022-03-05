@@ -7,13 +7,13 @@ namespace DentalClinic.DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddFinancialRecordTable : IMigrationMetadata
+    public sealed partial class SetColumnToBeNullable : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFinancialRecordTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(SetColumnToBeNullable));
         
         string IMigrationMetadata.Id
         {
-            get { return "202201312021561_AddFinancialRecordTable"; }
+            get { return "202203042016347_SetColumnToBeNullable"; }
         }
         
         string IMigrationMetadata.Source

@@ -20,10 +20,31 @@ let ReservationService = class ReservationService {
         return this.httpClient.post(this.URL + "/GetAvailableHours", booking);
     }
     getFinancialRecord(patientId) {
-        return this.httpClient.get(this.URL + "/getFinancialRecord/" + patientId);
+        return this.httpClient.get(this.URL + "/GetFinancialRecord/" + patientId);
+    }
+    getInvoice(patientId) {
+        return this.httpClient.get(this.URL + "/GetInvoice/" + patientId);
     }
     saveInvoice(invoice) {
         return this.httpClient.post(this.URL + "/SaveInvoice", invoice);
+    }
+    deleteFinancialRecord(id) {
+        return this.httpClient.get(this.URL + "/DeleteFinancialRecord/" + id);
+    }
+    getNextPatientVisit(id) {
+        return this.httpClient.get(this.URL + "/GetNextPatientVisit/" + id);
+    }
+    getPatientFile(patientId) {
+        return this.httpClient.get(this.URL + "/GetPatientFileById/" + patientId);
+    }
+    getProceduresNamesWithPrice() {
+        return this.httpClient.get(this.URL + "/GetProceduresNames");
+    }
+    savePatientRecord(patientFile) {
+        return this.httpClient.post(this.URL + "/SavePatientRecord", patientFile);
+    }
+    deletePatientRecord(recordId) {
+        return this.httpClient.get(this.URL + "/DeletePatientRecord/" + recordId);
     }
 };
 ReservationService = __decorate([

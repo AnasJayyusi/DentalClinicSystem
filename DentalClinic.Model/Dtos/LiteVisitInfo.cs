@@ -9,5 +9,6 @@ namespace DentalClinic.Model.Dtos
         public string PatientName{ get; set; }
         public DateTime VisitTime { get; set; }
         public string PhoneNumber { get; set; }
+        public bool IsPatientDeleted { get; set; }
     }
 }

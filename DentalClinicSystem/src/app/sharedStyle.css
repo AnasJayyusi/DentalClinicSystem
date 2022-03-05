@@ -1,10 +1,21 @@
-﻿
-/*!
+﻿/*!
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+#parentDiv {
+    position: relative;
+}
+#childDiv {
+    position: sticky;
+    bottom: 0;
+}
+
+#note {
+    background-color: lightgoldenrodyellow
+}
+
 
 :root {
     --blue: #007bff;
@@ -206,12 +217,14 @@ caption {
 }
 
 th {
-    text-align: inherit
+    text-align: center;
+    font-size: larger;
 }
 
 label {
     display: inline-block;
-    margin-bottom: .5rem
+    margin-bottom: .5rem;
+    font-size: larger;
 }
 
 button {
@@ -1811,7 +1824,10 @@ pre {
     .table td, .table th {
         padding: .75rem;
         vertical-align: top;
-        border-top: 1px solid #dee2e6
+        border-top: 1px solid #dee2e6;
+        font-size:large;
+        text-align:center;
+        
     }
 
     .table thead th {
@@ -2094,7 +2110,7 @@ pre {
     width: 100%;
     height: calc(1.5em + .75rem + 2px);
     padding: .375rem .75rem;
-    font-size: 1rem;
+    font-size: large;
     font-weight: 400;
     line-height: 1.5;
     color: #495057;
@@ -10427,26 +10443,46 @@ input[type="date"]::-webkit-datetime-edit, input[type="date"]::-webkit-inner-spi
 
 input[type="date"]::-webkit-datetime-edit-year-field {
     position: absolute !important;
-    padding: 2px;
+    padding: 4px;
     color: #000;
-    left: 56px;
+    left: 90px;
 }
 
 input[type="date"]::-webkit-datetime-edit-month-field {
     position: absolute !important;
-    padding: 2px;
+    padding: 4px;
     color: #000;
-    left: 26px;
+    left: 40px;
 }
 
 
 input[type="date"]::-webkit-datetime-edit-day-field {
     position: absolute !important;
     color: #000;
-    padding: 2px;
-    left: 4px;
+    padding: 4px;
+    left: 0px;
 }
 
 .disabledDiv {
     opacity: 0.4;
+}
+
+.titleStyle {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.helpStyle {
+    color: gray;
+    font-size:small;
+}
+
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
 }

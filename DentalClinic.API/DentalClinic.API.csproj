@@ -87,6 +87,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BillingApiController.cs" />
     <Compile Include="Controllers\CalendarApiController.cs" />
     <Compile Include="Controllers\PatientApiController.cs" />
     <Compile Include="Controllers\ReservationApiController.cs" />
@@ -94,6 +95,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\BillingService.cs" />
     <Compile Include="Services\CalendarService.cs" />
     <Compile Include="Services\PatientService.cs" />
     <Compile Include="Services\ReservationService.cs" />
